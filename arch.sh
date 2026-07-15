@@ -50,11 +50,11 @@ timedatectl set-ntp true
 pacman -Sy --noconfirm
 
 # Wipe drive
-sgdisk --zap-all /dev/nvme0n1
+sgdisk --zap-all /dev/sda
 
 echo "Creating partition tables"
-printf "n\n1\n4096\n+128M\nef00\nw\ny\n" | gdisk /dev/nvme0n1 # partition 1 : ESP/EFI, 128Mo, flag=$ef00 (boot), starting sector = 4096o
-printf "n\n2\n\n\n8e00\nw\ny\n" | gdisk /dev/nvme0n1 #partition 2 : linux partition, flag $8300, size remaining
+printf "n\n1\n4096\n+128M\nef00\nw\ny\n" | gdisk /dev/sda1 # partition 1 : ESP/EFI, 128Mo, flag=$ef00 (boot), starting sector = 4096o
+printf "n\n2\n\n\n8e00\nw\ny\n" | gdisk /dev/sda2 #partition 2 : linux partition, flag $8300, size remaining
 
 echo "Building EFI filesystem"
 yes | mkfs.fat -F32 /dev/nvme0n1p1 #format EPS partition in FAT32
