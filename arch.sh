@@ -3,7 +3,7 @@
 ###########################################################################
 # 			        My Arch-linux installation script                     #
 #                                                                         #
-# Hardware    : NVME SSD UEFI Laptop with Intel+Nvidia GPU                #
+# Hardware    : SDA plus (NVME SSD UEFI Laptop with Intel+Nvidia GPU  )              #
 # Encryption  : LVM on LUKS (FDE w/ encrypted swap but unencrypted /boot) #
 # 		LUKS  : --cypher=aes-xts-plain64 --pbkdf=argon2id                 #
 # 		LVM   : 2 * Ext4 volumes (/ & swap)                               #
@@ -32,7 +32,7 @@ if [ $? != 0 ]; then echo "No internet connection. Try 'wifi-menu' and try again
 ##################################
 efivar -l >/dev/null 2>&1
 
-if [[ $? -eq 0 ]] && lsblk | grep -q "nvme"; then
+if [[ $? -eq 0 ]] && lsblk | grep -q "sda"; then
     echo "Welcome to my custom Arch install script"
 else
     echo "It's a very bad idea to run a script without read it. The current script only support UEFI PC w/ NVME SSD"
